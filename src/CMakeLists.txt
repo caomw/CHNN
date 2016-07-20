@@ -1,0 +1,21 @@
+FIND_PACKAGE(OpenCV REQUIRED)
+
+INCLUDE_DIRECTORIES(/opt/OpenBLAS/include)
+
+FILE(GLOB SRC "../include/*.hpp" "*.cpp" "*.cu")
+ADD_LIBRARY(recognition SHARED ${SRC})
+
+ADD_LIBRARY(recognition_static STATIC ${SRC})
+SET_TARGET_PROPERTIES(recognition_static PROPERTIES OUTPUT_NAME "recognition")
+
+SET_TARGET_PROPERTIES(recognition PROPERTIES CLEAN_DIRECT_OUTPUT 1)
+SET_TARGET_PROPERTIES(recognition_static PROPERTIES CLEAN_DIRECT_OUTPUT 1)
+
+SET_TARGET_PROPERTIES(recognition _PROPERTIES VERSION 1.2 SOVERSION 1)
+TARGET_LINK_LIBRARIES(recognition_static ${OpenCV_LIBS})
+
+INSTALL(TARGETS recognition recognition_static
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib)
+
+INSTALL(FILES ../include/ DESTINATION include/recognition)
