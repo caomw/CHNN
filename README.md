@@ -7,4 +7,4 @@ You can download transformed vgg model [here] (https://pan.baidu.com/s/1o8mzO4i)
 
 
 ##Reference:
-caffe[http://caffe.berkeleyvision.org/]
+* [caffe](http://caffe.berkeleyvision.org/)
